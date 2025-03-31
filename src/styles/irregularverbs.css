@@ -93,6 +93,36 @@ body {
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.scroll-buttons {
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.scroll-buttons.show {
+  opacity: 1;
+}
+
+.scroll-icon {
+  font-size: 2rem;
+  color: white;
+  background: #444;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.scroll-icon:hover {
+  background: #666;
+}
+
+
 @media (max-width: 768px) {
   .irregular-verbs {
     font-size: 20px;
