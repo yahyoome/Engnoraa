@@ -17,6 +17,7 @@ const App = () => {
           </div>
         ))}
       </div>
+      <footer>english.go</footer>
     </div>
   );
 };

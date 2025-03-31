@@ -40,6 +40,7 @@ body {
   gap: 20px;
   width: 90%;
   max-width: 1200px;
+  margin-bottom: 3rem;
 }
 
 .id {
@@ -73,6 +74,20 @@ body {
 
 .card p strong {
   color: #fff;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  color: #ffa500;
+  background-color: #1e1e1e;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
 }
 
 @media (max-width: 768px) {
