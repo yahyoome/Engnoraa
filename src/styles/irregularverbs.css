@@ -45,8 +45,8 @@ body {
 }
 
 .id {
-  top: 0;
-  right: 18px;
+  top: -5px;
+  right: 45px;
   color: #555;
   font-size: 20px;
   position: absolute;
@@ -59,6 +59,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   text-align: start;
+  transition: background-color 0.3s;
 }
 
 .verb-title {
@@ -122,6 +123,20 @@ body {
   background: #666;
 }
 
+/* Checkbox styling */
+.verb-checkbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #ffa500;
+}
+
+.card.completed {
+  background-color: #333;
+}
 
 @media (max-width: 768px) {
   .irregular-verbs {
