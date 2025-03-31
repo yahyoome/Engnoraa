@@ -1,10 +1,11 @@
-import React from "react";
-import verbs from "./irregularVerbs.json";
+import '../styles/irregularverbs.css'
+import verbs from "../irregularVerbs.json";
+import { Link } from 'react-router-dom';
 
-const App = () => {
+const irregularVerbs = () => {
   return (
     <div className="container">
-      <header className="header">Irregular <span>Verbs</span></header>
+      <header className="irregular-verbs">Irregular <span>Verbs</span></header>
       <div className="verbs-list">
         {verbs.map((verb, index) => (
           <div key={index} className="card">
@@ -17,9 +18,9 @@ const App = () => {
           </div>
         ))}
       </div>
-      <footer>english.go</footer>
+      <Link to="/" className='go-home'>english.go</Link>
     </div>
   );
 };
 
-export default App;
+export default irregularVerbs;

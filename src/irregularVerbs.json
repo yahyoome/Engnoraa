@@ -197,5 +197,5 @@
   { "infinitive": "misread", "past": "misread", "pastParticiple": "misread", "translation": "noto‘g‘ri o‘qimoq", "pronunciation": "mis-reed - mis-reed - mis-reed" },
   { "infinitive": "oversell", "past": "oversold", "pastParticiple": "oversold", "translation": "ortiqcha sotmoq", "pronunciation": "oh-ver-sell - oh-ver-sold - oh-ver-sold" },
   { "infinitive": "undertake", "past": "undertook", "pastParticiple": "undertaken", "translation": "o‘z zimmasiga olish", "pronunciation": "uhn-der-teyk - uhn-der-took - uhn-der-teykn" },
-  { "infinitive": "miscast", "past": "miscast", "pastParticiple": "miscast", "translation": "noto‘g‘ri rol"}
+  { "infinitive": "miscast", "past": "miscast", "pastParticiple": "miscast", "translation": "noto‘g‘ri rol", "pronunciation": "miskast"}
 ] 
