@@ -10,6 +10,7 @@ const IrregularVerbs = () => {
   });
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
 
   useEffect(() => {
     localStorage.setItem("completedVerbs", JSON.stringify(completed));
@@ -21,12 +22,19 @@ const IrregularVerbs = () => {
     setCompleted(newCompleted);
   };
 
-  const filteredVerbs = verbs.filter((verb) =>
-    verb.infinitive.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    verb.past.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    verb.pastParticiple.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    verb.translation.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredVerbs = verbs.filter((verb, index) => {
+    const matchesSearch =
+      verb.infinitive.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      verb.past.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      verb.pastParticiple.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      verb.translation.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const isCompleted = completed[index];
+
+    if (filterStatus === "completed") return matchesSearch && isCompleted;
+    if (filterStatus === "notCompleted") return matchesSearch && !isCompleted;
+    return matchesSearch;
+  });
 
   return (
     <div className="container">
@@ -40,8 +48,14 @@ const IrregularVerbs = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
+      <div className="filter-buttons">
+        <button onClick={() => setFilterStatus("all")} className={filterStatus === "all" ? "active" : ""}>All</button>
+        <button onClick={() => setFilterStatus("completed")} className={filterStatus === "completed" ? "active" : ""}>Completed</button>
+        <button onClick={() => setFilterStatus("notCompleted")} className={filterStatus === "notCompleted" ? "active" : ""}>Not Completed</button>
+      </div>
+
       <div className="verbs-list">
-        {filteredVerbs.map((verb, index) => {
+        {filteredVerbs.map((verb) => {
           const originalIndex = verbs.findIndex(v => v.infinitive === verb.infinitive);
           return (
             <div key={originalIndex} className={`card ${completed[originalIndex] ? 'completed' : ''}`}>
