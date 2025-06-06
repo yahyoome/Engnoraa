@@ -1,5 +1,5 @@
 import '../styles/irregularverbs.css';
-import verbs from "../irregularVerbs.json";
+import verbs from "../jsonFiles/irregularVerbs.json";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 

@@ -1,0 +1,68 @@
+.wheel-game-container {
+    text-align: center;
+    margin-top: 30px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .wheel {
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid #333;
+    background: conic-gradient(
+      #4caf50 0deg 90deg,
+      #2196f3 90deg 180deg,
+      #f44336 180deg 270deg,
+      #ffeb3b 270deg 360deg
+    );
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    user-select: none;
+    transition: transform 2.5s ease-out;
+  }
+  
+  .center-icon {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    pointer-events: none;
+  }
+  
+  .spin-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .spin-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .result-section {
+    margin-top: 30px;
+  }
+  
+  .answer-blur {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #eee;
+    filter: blur(4px);
+    cursor: pointer;
+    user-select: none;
+    transition: filter 0.3s ease;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+  
+  .answer-blur:hover {
+    filter: none;
+  }
+  
