@@ -4,19 +4,8 @@ import "../styles/home.css";
 const Home = () => {
   return (
     <div className="home-container">
-      <header className="home-logo">english.<span>go</span></header>
-      <div className="cards-container">
-
-        <Link to="/irregular-verbs" className="home-card">
-          <span className="emoji">📖</span>
-          <h3>Irregular Verbs</h3>
-        </Link>
-
-        <Link to="/random-game" className="home-card">
-          <span className="emoji">📖</span>
-          <h3>Random game</h3>
-        </Link>
-
+      <div className="home-page">
+        
       </div>
     </div>
   );
