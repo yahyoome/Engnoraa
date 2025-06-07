@@ -61,7 +61,7 @@ const IrregularVerbs = () => {
           const isChecked = completed[originalIndex];
 
           return (
-            <div key={originalIndex} className={`card ${isChecked ? 'completed' : ''}`}>
+            <div id='card-decr' key={originalIndex} className={`card ${isChecked ? 'completed' : ''}`}>
               <div className="card-header">
                 <div
                   className="thunder-icon"

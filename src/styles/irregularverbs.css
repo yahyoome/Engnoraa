@@ -7,22 +7,32 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-}
-
-.irregular-verbs {
-    font-size: 2.2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.irregular-verbs span {
-    color: #2970ff;
-}
-
-.search-input {
+  }
+  
+  .irregular-verbs {
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 400px;
-    margin: 0 auto 1rem;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    background: #121219;
+    font-size: 30px;
+    display: flex;
+    text-align: center;
+    position: fixed;
+    z-index: 10;
+  }
+  
+  .irregular-verbs span {
+    color: #2970ff;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: 100%;
+    height: 50px;
+    margin: 3rem auto 1rem auto;
     display: block;
     padding: 10px 15px;
     border-radius: 10px;
@@ -30,17 +40,17 @@
     outline: none;
     background: #0c0d11;
     color: white;
-}
-
-.filter-buttons {
+  }
+  
+  .filter-buttons {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
     margin-bottom: 1rem;
     flex-wrap: wrap;
-}
-
-.filter-buttons button {
+  }
+  
+  .filter-buttons button {
     padding: 8px 15px;
     border: none;
     border-radius: 10px;
@@ -48,80 +58,90 @@
     color: white;
     cursor: pointer;
     transition: 0.3s;
-}
-
-.filter-buttons .active,
-.filter-buttons button:hover {
+  }
+  
+  .filter-buttons .active,
+  .filter-buttons button:hover {
     background: #2970ff;
-}
-
-.verbs-list {
+  }
+  
+  .verbs-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
     flex: 1;
-}
-
-.card {
+  }
+  
+  .card {
     position: relative;
     background: #0c0d11;
     padding: 1rem;
     border-radius: 15px;
-    position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     border: 1.5px solid #1a1a1a;
     box-sizing: border-box;
     transition: background 0.3s ease, border 0.3s ease;
-}
-
-.card.completed {
+  
+    /* Fix for consistent size */
+    min-height: 220px;
+    height: 100%;
+  }
+  
+  .card.completed {
     background: rgba(41, 112, 255, 0.07);
     border-color: #2970ff;
-}
-
-.card-header {
+  }
+  
+  .card-header {
     top: 10px;
     right: 15px;
     position: absolute;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.thunder-icon {
+    max-width: 90%;
+    overflow: hidden;
+  }
+  
+  .thunder-icon {
     font-size: 15px;
     color: #aaa;
     cursor: pointer;
     transition: 0.2s;
-}
-
-.card.completed .thunder-icon {
+  }
+  
+  .card.completed .thunder-icon {
     color: #2970ff;
     transform: scale(1.1);
-}
-
-.card .id {
+  }
+  
+  .card .id {
     font-size: 20px;
     font-weight: bolder;
     color: #999;
-}
-
-.verb-title {
+  }
+  
+  .verb-title {
     font-size: 1.4rem;
     color: #2970ff;
     margin: 0;
     text-transform: capitalize;
-}
-
-.card p {
+  }
+  
+  .card p {
     margin: 0;
     font-size: 0.95rem;
-}
-
-/* Footer */
-.footer {
+    color: #aaa;
+  }
+  
+  .card p strong {
+    color: #fff;
+  }
+  
+  /* Footer */
+  .footer {
     bottom: 0;
     left: 0;
     width: 100%;
@@ -133,25 +153,26 @@
     font-size: 0.9rem;
     color: #888;
     position: fixed;
-}
-
-.footer a {
+  }
+  
+  .footer a {
     color: #2970ff;
     text-decoration: none;
     margin-left: 5px;
-}
-
-.footer a:hover {
+  }
+  
+  .footer a:hover {
     text-decoration: underline;
-}
-
-/* Responsive tweaks */
-@media (max-width: 480px) {
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 480px) {
     .verb-title {
-        font-size: 1.2rem;
+      font-size: 1.2rem;
     }
-
+  
     .card p {
-        font-size: 0.85rem;
+      font-size: 0.85rem;
     }
-}
+  }
+  
