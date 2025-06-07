@@ -2,6 +2,7 @@ import '../styles/irregularverbs.css';
 import verbs from "../jsonFiles/irregularVerbs.json";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { BsLightningChargeFill } from 'react-icons/bs';
 
 const IrregularVerbs = () => {
   const [completed, setCompleted] = useState(() => {
@@ -37,7 +38,7 @@ const IrregularVerbs = () => {
   });
 
   return (
-    <div className="container">
+    <div className="verbs-container">
       <header className="irregular-verbs">Irregular <span>Verbs</span></header>
 
       <input
@@ -57,15 +58,21 @@ const IrregularVerbs = () => {
       <div className="verbs-list">
         {filteredVerbs.map((verb) => {
           const originalIndex = verbs.findIndex(v => v.infinitive === verb.infinitive);
+          const isChecked = completed[originalIndex];
+
           return (
-            <div key={originalIndex} className={`card ${completed[originalIndex] ? 'completed' : ''}`}>
-              <input
-                type="checkbox"
-                checked={completed[originalIndex]}
-                onChange={() => toggleCompletion(originalIndex)}
-                className="verb-checkbox"
-              />
-              <h1 className="id">{originalIndex + 1}</h1>
+            <div key={originalIndex} className={`card ${isChecked ? 'completed' : ''}`}>
+              <div className="card-header">
+                <div
+                  className="thunder-icon"
+                  onClick={() => toggleCompletion(originalIndex)}
+                  title={isChecked ? "Completed" : "Mark as complete"}
+                >
+                  <BsLightningChargeFill />
+                </div>
+                <span className="id">{originalIndex + 1}</span>
+              </div>
+
               <h2 className="verb-title">{verb.infinitive}</h2>
               <p><strong>Past Simple:</strong> {verb.past}</p>
               <p><strong>Past Participle:</strong> {verb.pastParticiple}</p>
@@ -76,7 +83,10 @@ const IrregularVerbs = () => {
         })}
       </div>
 
-      <Link to="/" className="go-home">english.go</Link>
+      <footer className="footer">
+        &copy; {new Date().getFullYear()} engnoraa |
+        <Link to="/"> Go Back</Link>
+      </footer>
     </div>
   );
 };

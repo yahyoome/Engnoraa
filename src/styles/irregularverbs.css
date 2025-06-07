@@ -1,0 +1,157 @@
+.verbs-container {
+    width: 100%;
+    min-height: 100vh;
+    background: #121219;
+    color: white;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.irregular-verbs {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.irregular-verbs span {
+    color: #2970ff;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 1rem;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #0c0d11;
+    color: white;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-buttons button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #0c0d11;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-buttons .active,
+.filter-buttons button:hover {
+    background: #2970ff;
+}
+
+.verbs-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    flex: 1;
+}
+
+.card {
+    position: relative;
+    background: #0c0d11;
+    padding: 1rem;
+    border-radius: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1.5px solid #1a1a1a;
+    box-sizing: border-box;
+    transition: background 0.3s ease, border 0.3s ease;
+}
+
+.card.completed {
+    background: rgba(41, 112, 255, 0.07);
+    border-color: #2970ff;
+}
+
+.card-header {
+    top: 10px;
+    right: 15px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.thunder-icon {
+    font-size: 15px;
+    color: #aaa;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card.completed .thunder-icon {
+    color: #2970ff;
+    transform: scale(1.1);
+}
+
+.card .id {
+    font-size: 20px;
+    font-weight: bolder;
+    color: #999;
+}
+
+.verb-title {
+    font-size: 1.4rem;
+    color: #2970ff;
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.card p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Footer */
+.footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #121219;
+    margin-top: 2rem;
+    padding: 1rem 0;
+    border-top: 1px solid #2c2c2c;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    position: fixed;
+}
+
+.footer a {
+    color: #2970ff;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .verb-title {
+        font-size: 1.2rem;
+    }
+
+    .card p {
+        font-size: 0.85rem;
+    }
+}

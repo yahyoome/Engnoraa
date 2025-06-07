@@ -2,8 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 body {
-    background: #fff;
+    background: #0C0D11;
 }
