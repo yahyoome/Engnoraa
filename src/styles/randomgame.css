@@ -1,68 +1,174 @@
 .wheel-game-container {
-    text-align: center;
-    margin-top: 30px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .wheel {
-    margin: 0 auto;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border: 5px solid #333;
-    background: conic-gradient(
-      #4caf50 0deg 90deg,
+  text-align: center;
+  margin: 2rem 1rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.wheel {
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px solid #333;
+  background: conic-gradient(#4caf50 0deg 90deg,
       #2196f3 90deg 180deg,
       #f44336 180deg 270deg,
-      #ffeb3b 270deg 360deg
-    );
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    position: relative;
-    user-select: none;
-    transition: transform 2.5s ease-out;
+      #ffeb3b 270deg 360deg);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  user-select: none;
+  transition: transform 2.5s ease-out;
+}
+
+.center-icon {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  pointer-events: none;
+}
+
+.add-player-section {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.add-player-section input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  width: 250px;
+  max-width: 100%;
+}
+
+.add-player-section button {
+  padding: 10px 16px;
+  font-size: 16px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-player-section button:hover {
+  background-color: #1976d2;
+}
+
+.players-list {
+  margin-top: 1.5rem;
+  color: #fff;
+}
+
+.players-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.players-list li {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.spin-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2970ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.spin-button:hover {
+  background-color: #2970ff;
+}
+
+.spin-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.result-section {
+  margin-top: 2rem;
+  background-color: #f1f1f1;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.result-section p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.answer-blur {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #eee;
+  filter: blur(4px);
+  cursor: pointer;
+  user-select: none;
+  transition: filter 0.3s ease;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.answer-blur:hover {
+  filter: none;
+}
+
+a {
+  color: #fff;
+}
+
+/* Responsive styles */
+@media (max-width: 480px) {
+  .wheel {
+    width: 150px;
+    height: 150px;
   }
-  
+
   .center-icon {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    pointer-events: none;
+    font-size: 1.5rem;
   }
-  
+
+  .add-player-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .add-player-section input {
+    width: 90%;
+  }
+
   .spin-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+    width: 90%;
+    font-size: 15px;
   }
-  
-  .spin-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-  
+
   .result-section {
-    margin-top: 30px;
+    width: 100%;
+    font-size: 0.95rem;
   }
-  
+
   .answer-blur {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #eee;
-    filter: blur(4px);
-    cursor: pointer;
-    user-select: none;
-    transition: filter 0.3s ease;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 6px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    width: 90%;
   }
-  
-  .answer-blur:hover {
-    filter: none;
-  }
-  
+}

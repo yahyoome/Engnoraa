@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/randomgame.css';
-
 import spinDB from '../jsonFiles/spinDB.json';
+import { Link } from 'react-router-dom';
 
 const words = spinDB.words;
 const tenses = spinDB.tenses;
@@ -123,6 +123,8 @@ export default function RandomGame() {
           <p><b>Tense:</b> {currentPair.tense}</p>
         </div>
       )}
+
+      <Link to='/'>Home</Link>
     </div>
   );
 }
