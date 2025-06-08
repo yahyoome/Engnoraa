@@ -1,97 +1,82 @@
 .wheel-game-container {
+  height: 85vh;
   text-align: center;
   margin: 2rem 1rem;
   font-family: Arial, sans-serif;
   color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.first-box {
+  width: 49%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 20px;
+  justify-content: center;
+  background: #121219;
+  border: 1px solid #2970ff;
+}
+
+.second-box {
+  width: 49%;
+  height: 100%;
+  padding: 20px;
+  position: relative;
+  border-radius: 20px;
+  background: #121219;
+  border: 1px solid #2970ff;
 }
 
 .wheel {
   margin: 0 auto;
-  width: 200px;
-  height: 200px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
   border: 5px solid #333;
-  background: conic-gradient(#4caf50 0deg 90deg,
-      #2196f3 90deg 180deg,
-      #f44336 180deg 270deg,
-      #ffeb3b 270deg 360deg);
+  background: conic-gradient(#2970ff 0deg 90deg,
+      transparent 90deg 180deg,
+      #2970ff 180deg 270deg,
+      transparent 270deg 360deg);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: relative;
   user-select: none;
   transition: transform 2.5s ease-out;
 }
 
-.center-icon {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
-  pointer-events: none;
-}
-
-.add-player-section {
+.actions-container {
   margin-top: 2rem;
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
-.add-player-section input {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-  width: 250px;
-  max-width: 100%;
-}
-
-.add-player-section button {
+.add-button,
+.spin-button {
   padding: 10px 16px;
   font-size: 16px;
-  background-color: #2196f3;
-  color: white;
   border: none;
   border-radius: 6px;
+  position: absolute;
   cursor: pointer;
   transition: background 0.3s ease;
+  color: white;
 }
 
-.add-player-section button:hover {
-  background-color: #1976d2;
-}
-
-.players-list {
-  margin-top: 1.5rem;
-  color: #fff;
-}
-
-.players-list ul {
-  list-style: none;
-  padding: 0;
-}
-
-.players-list li {
-  margin-bottom: 5px;
-  font-weight: bold;
+.add-button {
+  background: #0c0d11;
+  bottom: 10px;
+  right: 130px;
 }
 
 .spin-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #2970ff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.spin-button:hover {
-  background-color: #2970ff;
+  bottom: 10px;
+  right: 10px;
+  background: #2970ff;
 }
 
 .spin-button:disabled {
@@ -99,76 +84,180 @@
   opacity: 0.6;
 }
 
-.result-section {
-  margin-top: 2rem;
-  background-color: #f1f1f1;
-  padding: 1rem;
+.players-list {
+  color: #fff;
+  text-align: start;
+}
+
+.players-list p {
+  font-size: 30px;
+}
+
+.players-list ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.players-list li {
+  margin-bottom: 5px;
+  font-weight: bold;
+  background: #0c0d11;
+  padding: 15px;
   border-radius: 10px;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+}
+
+.player-icon {
+  margin-right: 10px;
+}
+
+.trash {
+  cursor: pointer;
+}
+
+.result-section {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  margin-top: 2rem;
+  padding: 1rem;
+  text-align: start;
+  border-top: 1px solid #2970ff;
+  background: rgba(41, 112, 255, 0.07);
+  /* background-color: #0c0d11; */
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .result-section p {
-  margin: 0.5rem 0;
   font-size: 1rem;
-}
-
-.answer-blur {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #eee;
-  filter: blur(4px);
-  cursor: pointer;
-  user-select: none;
-  transition: filter 0.3s ease;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 6px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-}
-
-.answer-blur:hover {
-  filter: none;
+  color: #fff;
+  margin-top: 10px;
 }
 
 a {
   color: #fff;
+  text-decoration: none;
 }
 
-/* Responsive styles */
-@media (max-width: 480px) {
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background-color: #0009;
+}
+
+.modal {
+  padding: 1rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  background: #121219;
+}
+
+.modal h3 {
+  color: #fff;
+  text-align: start;
+}
+
+.modal input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  color: #fff;
+  outline: none;
+  background: #0c0d11;
+  border: 1px solid #2970ff;
+}
+
+.modal button {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  background-color: #2970ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #1976d2;
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  .wheel-game-container {
+    display: block;
+  }
+
+  .first-box,
+  .second-box {
+    width: 100%;
+    height: 85%;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .first-box,
+  .second-box {
+    height: 75%;
+    padding: 10px;
+  }
+
+  .wheel {
+    width: 300px;
+    height: 300px;
+    margin-top: -2rem;
+  }
+
+  .players-list {
+    overflow-y: scroll;
+    height: 55%;
+  }
+
+  .players-list::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .players-list p {
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .first-box,
+  .second-box {
+    height: 50%;
+  }
+
   .wheel {
     width: 150px;
     height: 150px;
-  }
-
-  .center-icon {
-    font-size: 1.5rem;
-  }
-
-  .add-player-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .add-player-section input {
-    width: 90%;
-  }
-
-  .spin-button {
-    width: 90%;
-    font-size: 15px;
-  }
-
-  .result-section {
-    width: 100%;
-    font-size: 0.95rem;
-  }
-
-  .answer-blur {
-    width: 90%;
   }
 }

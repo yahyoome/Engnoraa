@@ -10,9 +10,9 @@ const Home = () => {
           <div className="rooms-ul">
             <Link to="/irregular-verbs">Irregular Verbs</Link>
             <Link to="/random-game">Random Game</Link>
-            <Link to="/prepare">Preparation</Link>
-            <Link to="/prepare">Preparation</Link>
-            <Link to="/prepare">Preparation</Link>
+            <Link to="/prepare">404</Link>
+            <Link to="/prepare">404</Link>
+            <Link to="/prepare">404</Link>
           </div>
           <h3 className="working">Currently Building...</h3>
           <div className="room-length">

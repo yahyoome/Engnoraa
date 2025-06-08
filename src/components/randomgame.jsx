@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/randomgame.css';
 import spinDB from '../jsonFiles/spinDB.json';
 import { Link } from 'react-router-dom';
+import { IoPerson } from "react-icons/io5";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const words = spinDB.words;
 const tenses = spinDB.tenses;
@@ -23,13 +25,40 @@ export default function RandomGame() {
   const [players, setPlayers] = useState([]);
   const [newPlayer, setNewPlayer] = useState('');
   const [currentPlayer, setCurrentPlayer] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  // ⬇️ LocalStorage dan boshlang‘ich o‘yinchilarni olish
+  useEffect(() => {
+    const savedPlayers = JSON.parse(localStorage.getItem('spinGamePlayers'));
+    if (savedPlayers && Array.isArray(savedPlayers)) {
+      setPlayers(savedPlayers);
+    }
+  }, []);
+
+  // ⬇️ LocalStorage ga saqlash funksiyasi
+  const updateLocalStorage = (updatedPlayers) => {
+    localStorage.setItem('spinGamePlayers', JSON.stringify(updatedPlayers));
+  };
 
   // O'yinchi qo‘shish funksiyasi
   const handleAddPlayer = () => {
     const trimmed = newPlayer.trim();
     if (trimmed !== '' && !players.includes(trimmed)) {
-      setPlayers([...players, trimmed]);
+      const updated = [...players, trimmed];
+      setPlayers(updated);
+      updateLocalStorage(updated);
       setNewPlayer('');
+      setShowModal(false);
+    }
+  };
+
+  // ⬇️ O‘yinchini o‘chirish funksiyasi
+  const handleDeletePlayer = (name) => {
+    const updated = players.filter(player => player !== name);
+    setPlayers(updated);
+    updateLocalStorage(updated);
+    if (currentPlayer === name) {
+      setCurrentPlayer(null);
     }
   };
 
@@ -50,7 +79,6 @@ export default function RandomGame() {
     setRotateDegree(finalDegree);
 
     setTimeout(() => {
-      // Ishlatilmagan juftliklardan bittasini tanlaymiz
       const unusedPairs = allPairs.filter(
         pair => !usedPairs.some(
           used => used.word === pair.word && used.tense === pair.tense
@@ -59,7 +87,6 @@ export default function RandomGame() {
 
       const randomPair = unusedPairs[Math.floor(Math.random() * unusedPairs.length)];
 
-      // Oxirgi o‘yinchidan farqli player tanlaymiz
       let filteredPlayers = players;
       if (currentPlayer && players.length > 1) {
         filteredPlayers = players.filter(player => player !== currentPlayer);
@@ -76,55 +103,76 @@ export default function RandomGame() {
 
   return (
     <div className="wheel-game-container">
-      {/* G‘ildirak */}
-      <div
-        className={`wheel ${spinning ? 'spinning' : ''}`}
-        style={{ transform: `rotate(${rotateDegree}deg)` }}
-      >
-        <div className="center-icon">🎯</div>
+      <div className="first-box">
+        {/* G‘ildirak */}
+        <div
+          className={`wheel ${spinning ? 'spinning' : ''}`}
+          style={{ transform: `rotate(${rotateDegree}deg)` }}
+        >
+        </div>
+
+        {/* Tugmalar */}
+        <div className="actions-container">
+          <button onClick={() => setShowModal(true)} className="add-button">
+            Add Player
+          </button>
+          <button onClick={spinWheel} disabled={spinning || players.length === 0} className="spin-button">
+            {spinning ? 'Spinning...' : 'Spin Wheel'}
+          </button>
+        </div>
       </div>
 
-      {/* O‘yinchi qo‘shish */}
-      <div className="add-player-section">
-        <input
-          type="text"
-          placeholder="Enter player name"
-          value={newPlayer}
-          onChange={(e) => setNewPlayer(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') handleAddPlayer();
-          }}
-        />
-        <button onClick={handleAddPlayer}>Add Player</button>
-      </div>
-
-      {/* O‘yinchilar ro‘yxati */}
-      {players.length > 0 && (
-        <div className="players-list">
-          <p>Players:</p>
-          <ul>
-            {players.map((player, idx) => (
-              <li key={idx}>{player}</li>
-            ))}
-          </ul>
+      {/* Modal */}
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3>Add New Player</h3>
+            <input
+              type="text"
+              placeholder="Enter player name"
+              value={newPlayer}
+              onChange={(e) => setNewPlayer(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleAddPlayer();
+              }}
+            />
+            <button onClick={handleAddPlayer}>Add</button>
+          </div>
         </div>
       )}
 
-      {/* Spin tugmasi */}
-      <button onClick={spinWheel} disabled={spinning || players.length === 0} className="spin-button">
-        {spinning ? 'Spinning...' : 'Spin Wheel'}
-      </button>
+      <div className="second-box">
+        {/* O‘yinchilar ro‘yxati */}
+        {players.length > 0 && (
+          <div className="players-list">
+            <p>Players: {players.length}</p>
+            <ul>
+              {players.map((player, idx) => (
+                <li key={idx}>
+                  <div className='player-item'>
+                    <IoPerson className='player-icon' /> {player}
+                  </div>
+                  <FaRegTrashAlt className='trash' onClick={() => handleDeletePlayer(player)} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-      {/* Natija */}
-      {currentPair && currentPlayer && !spinning && (
-        <div className="result-section">
-          <p><b>Player:</b> {currentPlayer}</p>
-          <p><b>Word:</b> {currentPair.word}</p>
-          <p><b>Tense:</b> {currentPair.tense}</p>
-        </div>
-      )}
+        {/* Natija */}
+        {currentPair && currentPlayer && !spinning && (
+          <div className="result-section">
+            <p><b>Player:</b> {currentPlayer}</p>
+            <p><b>Word:</b> {currentPair.word}</p>
+            <p><b>Tense:</b> {currentPair.tense}</p>
+          </div>
+        )}
+      </div>
 
-      <Link to='/'>Home</Link>
+      <footer className="footer">
+        &copy; {new Date().getFullYear()} engnoraa |
+        <Link to="/"> Go Back</Link>
+      </footer>
     </div>
   );
 }

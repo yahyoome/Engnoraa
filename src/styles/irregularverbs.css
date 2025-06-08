@@ -87,6 +87,10 @@
   transition: background 0.3s ease, border 0.3s ease;
 }
 
+.verbs-list .card:last-child {
+  margin-bottom: 2rem;
+}
+
 .card.completed {
   background: rgba(41, 112, 255, 0.07);
   border-color: #2970ff;
@@ -158,10 +162,6 @@
   color: #2970ff;
   text-decoration: none;
   margin-left: 5px;
-}
-
-.footer a:hover {
-  text-decoration: underline;
 }
 
 /* Responsive tweaks */
