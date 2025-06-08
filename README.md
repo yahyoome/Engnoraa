@@ -1,11 +1,13 @@
-# English.go - Learn Irregular Verbs Easily
+# Engnoraa
+## Engnoraa is an interactive platform designed to make learning English fun and effective. It helps users improve their vocabulary, grammar, and other language skills through engaging games and interactive tools. Suitable for learners from beginners to advanced levels.
 
-## English.go - bu ingliz tilidagi irregular (notog‘ri) fe'llarni oson va samarali o‘rganish uchun yaratilgan interaktiv veb-sayt. Ushbu loyiha boshlang‘ich va elementar darajadagi o‘quvchilar uchun ideal bo‘lib, fe’llarning infinitive (asosiy), past (o‘tgan zamon) va past participle (o‘tgan zamon sifatdoshi) shakllarini yodlashni osonlashtiradi.
+Key Features:
+Fun games to boost English vocabulary
 
-🚀 Xususiyatlar
+Interactive tools to simplify grammar learning
 
-✅ 200+ Irregular Fe’llar - Eng ko‘p ishlatiladigan fe’llar ro‘yxati
-✅ Tartibli UI - Qorong‘i (dark mode) dizayn bilan qulay interfeys
-✅ Talaffuz qo‘llanmasi - Fe’llarning talaffuzi (IPA yozuvi)
-✅ Tez va oson qidiruv - Fe’llarni tez topish imkoniyati
-✅ Mobilga mos - Har qanday qurilmada ishlaydi
+Content tailored for ESL learners
+
+Responsive design for both mobile and desktop
+
+![preview](https://github.com/user-attachments/assets/00542bea-89bc-4944-a034-e842e48977d9)
