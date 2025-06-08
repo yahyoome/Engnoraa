@@ -282,9 +282,13 @@ a {
 }
 
 @media (max-width: 400px) {
+  .wheel-game-container {
+    margin-bottom: 0;
+  }
+
   .first-box,
   .second-box {
-    height: 40%;
+    height: 45%;
   }
 
   .wheel {
