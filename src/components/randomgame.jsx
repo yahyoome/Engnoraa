@@ -80,14 +80,15 @@ export default function RandomGame() {
       return;
     }
 
-    if (playerQueue.length === 0) {
-      setPlayerQueue(shuffleArray(players));
-      return;
+    let queue = playerQueue;
+    if (queue.length === 0) {
+      queue = shuffleArray(players);
     }
 
-    const nextPlayer = playerQueue[0];
-    const remainingQueue = playerQueue.slice(1);
+    const nextPlayer = queue[0];
+    const remainingQueue = queue.slice(1);
 
+    setPlayerQueue(remainingQueue);
     setSpinning(true);
     const extraSpin = 360 * (3 + Math.floor(Math.random() * 3));
     const randomDegree = Math.floor(Math.random() * 360);
@@ -102,8 +103,7 @@ export default function RandomGame() {
 
       setCurrentPair(randomPair);
       setCurrentPlayer(nextPlayer);
-      setPlayerQueue(remainingQueue);
-      setUsedPairs([...usedPairs, randomPair]);
+      setUsedPairs(prev => [...prev, randomPair]);
       setTimeLeft(60);
       setShowAnswerModal(true);
       setSpinning(false);
@@ -208,7 +208,7 @@ export default function RandomGame() {
         <div className={`wheel ${spinning ? 'spinning' : ''}`} style={{ transform: `rotate(${rotateDegree}deg)` }}></div>
         <div className="actions-container">
           <button onClick={() => setShowAddPlayerModal(true)} className="add-button">Add Player</button>
-          <button onClick={spinWheel} disabled={spinning || players.length === 0 || showAnswerModal} className="spin-button">
+          <button onClick={spinWheel} disabled={spinning || players.length === 0 || showAnswerModal || !questionLimit} className="spin-button">
             {spinning ? 'Spinning...' : 'Spin Wheel'}
           </button>
         </div>
@@ -299,7 +299,7 @@ export default function RandomGame() {
       </div>
 
       <footer className="footer">
-        &copy; {new Date().getFullYear()} engnoraa | <Link to="/"> Go Back</Link>
+        &copy; {new Date().getFullYear()} engnoraa | <Link to="/" onClick={handleResetGame}> Go Back</Link>
       </footer>
     </div>
   );
