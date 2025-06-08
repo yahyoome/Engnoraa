@@ -123,27 +123,6 @@
   cursor: pointer;
 }
 
-.result-section {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  margin-top: 2rem;
-  padding: 1rem;
-  text-align: start;
-  border-top: 1px solid #2970ff;
-  background: rgba(41, 112, 255, 0.07);
-  /* background-color: #0c0d11; */
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-}
-
-.result-section p {
-  font-size: 1rem;
-  color: #fff;
-  margin-top: 10px;
-}
-
 a {
   color: #fff;
   text-decoration: none;
@@ -170,6 +149,27 @@ a {
   max-width: 400px;
   text-align: center;
   background: #121219;
+}
+
+.wheel-game-container .modal:last-child {
+  text-align: start;
+  position: relative;
+}
+
+.wheel-game-container .modal:last-child p {
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.wheel-game-container .modal:last-child button {
+  margin-top: 1rem;
+}
+
+.timer {
+  top: 5px;
+  right: 15px;
+  color: #09f;
+  position: absolute;
 }
 
 .modal h3 {
@@ -205,6 +205,41 @@ a {
   background-color: #1976d2;
 }
 
+.players-list {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.players-list::-webkit-scrollbar {
+  width: 0;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.home-button {
+  width: 100%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6c63ff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.home-button:hover {
+  background-color: #4b44e0;
+}
+
 /* Responsive */
 @media (max-width: 880px) {
   .wheel-game-container {
@@ -220,7 +255,6 @@ a {
 }
 
 @media (max-width: 500px) {
-
   .first-box,
   .second-box {
     height: 75%;
@@ -233,15 +267,6 @@ a {
     margin-top: -2rem;
   }
 
-  .players-list {
-    overflow-y: scroll;
-    height: 55%;
-  }
-
-  .players-list::-webkit-scrollbar {
-    width: 0;
-  }
-
   .players-list p {
     font-size: 20px;
     margin-top: 10px;
@@ -250,7 +275,6 @@ a {
 }
 
 @media (max-width: 400px) {
-
   .first-box,
   .second-box {
     height: 50%;
