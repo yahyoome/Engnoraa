@@ -14,6 +14,15 @@ words.forEach(word => {
   });
 });
 
+const shuffleArray = (array) => {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+};
+
 export default function RandomGame() {
   const [rotateDegree, setRotateDegree] = useState(0);
   const [spinning, setSpinning] = useState(false);
@@ -29,6 +38,7 @@ export default function RandomGame() {
   const [questionLimit, setQuestionLimit] = useState(null);
   const [questionCount, setQuestionCount] = useState(0);
   const [showQuestionLimitModal, setShowQuestionLimitModal] = useState(true);
+  const [playerQueue, setPlayerQueue] = useState([]);
   const timerRef = useRef(null);
 
   useEffect(() => {
@@ -45,7 +55,7 @@ export default function RandomGame() {
   const handleAddPlayer = () => {
     const trimmed = newPlayer.trim();
     if (trimmed !== '' && !players.some(p => p.name === trimmed)) {
-      const updated = [...players, { name: trimmed, xp: 0 }];
+      const updated = [...players, { name: trimmed, xp: 0, responseTimes: [] }];
       setPlayers(updated);
       updateLocalStorage(updated);
       setNewPlayer('');
@@ -70,6 +80,14 @@ export default function RandomGame() {
       return;
     }
 
+    if (playerQueue.length === 0) {
+      setPlayerQueue(shuffleArray(players));
+      return;
+    }
+
+    const nextPlayer = playerQueue[0];
+    const remainingQueue = playerQueue.slice(1);
+
     setSpinning(true);
     const extraSpin = 360 * (3 + Math.floor(Math.random() * 3));
     const randomDegree = Math.floor(Math.random() * 360);
@@ -81,13 +99,10 @@ export default function RandomGame() {
         pair => !usedPairs.some(used => used.word === pair.word && used.tense === pair.tense)
       );
       const randomPair = unusedPairs[Math.floor(Math.random() * unusedPairs.length)];
-      let filteredPlayers = players;
-      if (currentPlayer && players.length > 1) {
-        filteredPlayers = players.filter(player => player.name !== currentPlayer.name);
-      }
-      const randomPlayer = filteredPlayers[Math.floor(Math.random() * filteredPlayers.length)];
+
       setCurrentPair(randomPair);
-      setCurrentPlayer(randomPlayer);
+      setCurrentPlayer(nextPlayer);
+      setPlayerQueue(remainingQueue);
       setUsedPairs([...usedPairs, randomPair]);
       setTimeLeft(60);
       setShowAnswerModal(true);
@@ -103,7 +118,7 @@ export default function RandomGame() {
 
     if (timeLeft <= 0) {
       clearInterval(timerRef.current);
-      handleAnswer(true); // penalize = true
+      handleAnswer(true);
       return;
     }
 
@@ -115,13 +130,20 @@ export default function RandomGame() {
   }, [timeLeft, showAnswerModal]);
 
   const handleAnswer = (penalize = false) => {
+    const answeredIn = 60 - timeLeft;
     const updated = players.map(player => {
       if (player.name === currentPlayer.name) {
         const xpChange = penalize ? -5 : 10;
-        return { ...player, xp: player.xp + xpChange };
+        const responseTimes = player.responseTimes || [];
+        return {
+          ...player,
+          xp: player.xp + xpChange,
+          responseTimes: penalize ? responseTimes : [...responseTimes, answeredIn]
+        };
       }
       return player;
     });
+
     const sorted = [...updated].sort((a, b) => b.xp - a.xp);
     setPlayers(sorted);
     updateLocalStorage(sorted);
@@ -136,6 +158,9 @@ export default function RandomGame() {
   };
 
   const handleResetGame = () => {
+    const resetXP = players.map(p => ({ ...p, xp: 0, responseTimes: [] }));
+    setPlayers(resetXP);
+    updateLocalStorage(resetXP);
     setRotateDegree(0);
     setSpinning(false);
     setCurrentPair(null);
@@ -147,25 +172,39 @@ export default function RandomGame() {
     setQuestionLimit(null);
     setQuestionCount(0);
     setShowWinnerModal(false);
-    setPlayers([]);
-    localStorage.removeItem('spinGamePlayers');
     setShowQuestionLimitModal(true);
+    setPlayerQueue([]);
   };
 
   const handleQuestionLimitKeyDown = (e) => {
     if (e.key === 'Enter') {
-      // Agar haqiqiy son kiritilgan bo'lsa, modalni yopamiz
       if (questionLimit && questionLimit > 0) {
         setShowQuestionLimitModal(false);
       }
     }
   };
 
-  const winner = players.length ? players[0] : null;
+  const getWinner = () => {
+    if (players.length === 0) return null;
+
+    const maxXP = Math.max(...players.map(p => p.xp));
+    const topPlayers = players.filter(p => p.xp === maxXP);
+
+    if (topPlayers.length === 1) return topPlayers[0];
+
+    return topPlayers.reduce((best, current) => {
+      const avgBest = (best.responseTimes || []).reduce((a, b) => a + b, 0) / (best.responseTimes || []).length || Infinity;
+      const avgCurrent = (current.responseTimes || []).reduce((a, b) => a + b, 0) / (current.responseTimes || []).length || Infinity;
+      return avgCurrent < avgBest ? current : best;
+    });
+  };
+
+  const winner = getWinner();
 
   return (
     <div className="wheel-game-container">
       <div className="first-box">
+        <h3 className="questions">QS: {questionLimit}/{questionCount}</h3>
         <div className={`wheel ${spinning ? 'spinning' : ''}`} style={{ transform: `rotate(${rotateDegree}deg)` }}></div>
         <div className="actions-container">
           <button onClick={() => setShowAddPlayerModal(true)} className="add-button">Add Player</button>
@@ -228,7 +267,7 @@ export default function RandomGame() {
         </div>
       )}
 
-      {showWinnerModal && (
+      {showWinnerModal && winner && (
         <div className="modal-overlay">
           <div className="modal">
             <h3>Game Over!</h3>
