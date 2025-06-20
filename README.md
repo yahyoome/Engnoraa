@@ -1,5 +1,5 @@
 # Engnoraa
-## Engnoraa is an interactive platform designed to make learning English fun and effective. It helps users improve their vocabulary, grammar, and other language skills through engaging games and interactive tools. Suitable for learners from beginners to advanced levels.
+Engnoraa is an interactive platform designed to make learning English fun and effective. It helps users improve their vocabulary, grammar, and other language skills through engaging games and interactive tools. Suitable for learners from beginners to advanced levels.
 
 Key Features:
 Fun games to boost English vocabulary
