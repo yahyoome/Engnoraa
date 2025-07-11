@@ -5,7 +5,7 @@ const NotFound = () => {
   return (
     <div className="notfound-wrapper">
       <div className="notfound-card">
-        <h1 className="notfound-title">404</h1>
+        <h1 className="notfound-title">4004</h1>
         <p className="notfound-subtitle">Oops! Sahifa topilmadi.</p>
         <Link to="/" className="notfound-btn">Bosh sahifaga qaytish</Link>
       </div>
