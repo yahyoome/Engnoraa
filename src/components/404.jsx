@@ -1,4 +1,5 @@
 import "../styles/404.css";
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
@@ -6,7 +7,7 @@ const NotFound = () => {
       <div className="notfound-card">
         <h1 className="notfound-title">404</h1>
         <p className="notfound-subtitle">Oops! Sahifa topilmadi.</p>
-        <a href="/" className="notfound-btn">Bosh sahifaga qaytish</a>
+        <Link to="/" className="notfound-btn">Bosh sahifaga qaytish</Link>
       </div>
     </div>
   );
