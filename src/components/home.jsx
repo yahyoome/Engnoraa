@@ -10,7 +10,7 @@ const Home = () => {
           <div className="rooms-ul">
             <Link to="/irregular-verbs">Irregular Verbs</Link>
             <Link to="/random-game">Random Game</Link>
-            <Link to="tel:+998916121208">Call qilish</Link>
+            <Link to="/preprare">404</Link>
             <Link to="/prepare">404</Link>
             <Link to="/prepare">404</Link>
           </div>

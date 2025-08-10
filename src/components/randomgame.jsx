@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/randomgame.css';
 import spinDB from '../jsonFiles/spinDB.json';
+import irregularVerbs from '../jsonFiles/irregularVerbs.json';
 import { Link } from 'react-router-dom';
 import { IoPerson } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-const words = spinDB.words;
+const words = irregularVerbs.map(verb => verb.infinitive);
 const tenses = spinDB.tenses;
 const allPairs = [];
 words.forEach(word => {
