@@ -14,6 +14,10 @@ const IrregularVerbs = () => {
   const [filterStatus, setFilterStatus] = useState("all");
 
   useEffect(() => {
+    document.title = "Engnoraa | Irregular Verbs";    
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("completedVerbs", JSON.stringify(completed));
   }, [completed]);
 
@@ -70,7 +74,8 @@ const IrregularVerbs = () => {
                 >
                   <BsLightningChargeFill />
                 </div>
-                <span className="id">{originalIndex + 1}</span>
+                <span className="id" onClick={() => toggleCompletion(originalIndex)}
+                  title={isChecked ? "Completed" : "Mark as complete"}>{originalIndex + 1}</span>
               </div>
 
               <h2 className="verb-title">{verb.infinitive}</h2>

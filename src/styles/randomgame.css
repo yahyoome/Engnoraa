@@ -208,8 +208,12 @@ a {
   cursor: pointer;
 }
 
+.modal .cancel-button {
+  background: crimson;
+}
+
 .modal button:hover {
-  background-color: #1976d2;
+  opacity: 0.90;
 }
 
 .players-list {

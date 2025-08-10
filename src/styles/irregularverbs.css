@@ -104,7 +104,6 @@
   align-items: center;
   gap: 0.5rem;
   max-width: 90%;
-  overflow: hidden;
 }
 
 .thunder-icon {
@@ -116,13 +115,31 @@
 
 .card.completed .thunder-icon {
   color: #2970ff;
-  transform: scale(1.1);
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px #2970ff) brightness(1.5);
+  animation: thunder-glow 0.8s cubic-bezier(.4,2,.6,-0.5) forwards alternate;
+}
+
+@keyframes thunder-glow {
+  0% {
+    filter: drop-shadow(0 0 2px #2970ff) brightness(1.2);
+  }
+  50% {
+    filter: drop-shadow(0 0 16px #2970ff) brightness(2);
+  }
+  100% {
+    filter: drop-shadow(0 0 8px #2970ff) brightness(1.5);
+  }
 }
 
 .card .id {
   font-size: 20px;
   font-weight: bolder;
   color: #999;
+}
+
+.card.completed .id {
+  color: #2970ff;
 }
 
 .verb-title {

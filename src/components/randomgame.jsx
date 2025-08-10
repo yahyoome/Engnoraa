@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../styles/randomgame.css';
 import spinDB from '../jsonFiles/spinDB.json';
 import irregularVerbs from '../jsonFiles/irregularVerbs.json';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoPerson } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -41,6 +41,11 @@ export default function RandomGame() {
   const [showQuestionLimitModal, setShowQuestionLimitModal] = useState(true);
   const [playerQueue, setPlayerQueue] = useState([]);
   const timerRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Engnoraa | Random Game";    
+  }, []);
 
   useEffect(() => {
     const savedPlayers = JSON.parse(localStorage.getItem('spinGamePlayers'));
@@ -233,6 +238,11 @@ export default function RandomGame() {
               }}
             >
               Start Game
+            </button>
+            <button
+              onClick={() => navigate('/')} className="cancel-button"
+            >
+              Quit Game
             </button>
           </div>
         </div>
