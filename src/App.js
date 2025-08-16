@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './components/home'
 import RandomGame from './components/randomgame'
 import NotFound from './components/404'
+import Tenses from './components/tenses'
 
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/irregular-verbs' element={<IrregularVerbs />} />
         <Route path='/random-game' element={<RandomGame />} />
+        <Route path='/tenses' element={<Tenses />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
